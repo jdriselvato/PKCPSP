@@ -1,4 +1,4 @@
-local character={}
+local character={} -- not used any more
 
 local xLoc = 20
 local yLoc = 10

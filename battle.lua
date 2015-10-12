@@ -1,4 +1,4 @@
-local battle={}
+local battle={} -- not used yet
 
 local xLoc = 10
 local yLoc = 10
