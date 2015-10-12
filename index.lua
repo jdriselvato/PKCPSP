@@ -1,17 +1,18 @@
---//## Set up CPU Speed
---//System.setCpuSpeed(333)
+-- Set up CPU Speed
+-- System.setCpuSpeed(333)
 -- System.usbDiskModeActivate()
 
-local board = require("board")
-local character = require("character")
-local battle = require("battle")
+-- Load helper scripts
+local board = require("board") -- load the board
+local character = require("character") -- not used yet
+local battle = require("battle") -- not used yet
+
+-- local variables
+local pad = Controls.read()
 
 --///## MAIN ###\\--
 
-while true do
-	pad = Controls.read()
-	if pad:start() then break end
-
+while not pad:start() do
 	-- System.draw()
 	screen:clear()
 

@@ -2,7 +2,11 @@ local board={}
 
 local Resolution = { width = 480, height = 272 } -- PSP Screen Size
 
-local statusbar = {height = 20}
+local statusbar = {
+	height = 20,
+	currentScore = 0,
+	currentCoins = 0
+}
 
 local white = Color.new(255, 255, 255)
 local gray = Color.new(255/2, 255/2, 255/2)
@@ -18,10 +22,23 @@ local unit = {
 	xLoc = 20
 }
 
-
-
 function board.build()
-	for i=0,3 do
+	board.buildStatusBar()
+	board.buildField()
+end
+
+function board.buildStatusBar()
+	-- Show Score
+	score = "Score: " .. tostring(statusbar.currentScore)
+	screen:print(50, statusbar.height/2 - 2, score, white)
+
+	-- Show Coins
+	coins = "Coins: " .. tostring(statusbar.currentCoins)
+	screen:print(200, statusbar.height/2 - 2, coins, white)
+end
+
+function board.buildField()
+	for i=0,3 do -- 3 rows 
 		screen:drawLine(0, (i * 70) + 20, Resolution.width, (i * 70) + 20, white )
 	end
 end
