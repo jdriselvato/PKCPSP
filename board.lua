@@ -1,6 +1,9 @@
 local board={}
 
-local Resolution = { width = 480, height = 272 } -- PSP Screen Size
+local Resolution = { -- PSP Screen Size
+	width = 480, 
+	height = 272
+} 
 
 local statusbar = {
 	height = 20, -- height of status bar
@@ -23,7 +26,8 @@ local cursor = {
 
 local unit = { -- the "unit" that will be sent out
 	yLoc = 0,
-	xLoc = 20
+	xLoc = 20,
+	released = false
 }
 
 function board.build() -- build entire board
@@ -32,13 +36,13 @@ function board.build() -- build entire board
 end
 
 function board.buildStatusBar()
-	-- Show Score
+	-- Draw/show Score
 	score = "Score: " .. tostring(statusbar.currentScore)
 	screen:print(50, statusbar.height/2 - 2, score, colors.white)
 
-	-- Show Coins
+	-- Draw/Show Coins
 	coins = "Coins: " .. tostring(statusbar.currentCoins)
-	screen:print(200, statusbar.height/2 - 2, coins, colors.white)
+	screen:print((Resolution.width/2) + 50, statusbar.height/2 - 2, coins, colors.white)
 end
 
 function board.buildField()
@@ -60,10 +64,13 @@ function board.cursorActions()
 	 	if pad:down() then -- move cursor down
 	 		board.moveDown()
 	 	end
+	 	if pad:cross() then -- release a new unit
+ 			unit.released = true
+ 		end
 	 	oldpad = pad -- used to check if cursor was just moved
  	end
 
- 	if pad:cross() then
+ 	if unit.released == true then
  		board.releaseUnit()
  	end
 
@@ -71,6 +78,9 @@ function board.cursorActions()
 end
 
 function board.releaseUnit()
+	if unit.yLoc >= Resolution.width then
+		unit.released = false
+	end
 	unit.yLoc = cursor.yLoc + (cursor.height/2) + statusbar.height -- y location of unit
 
 	unit.xLoc = unit.xLoc + 1
@@ -91,7 +101,6 @@ function board.moveDown()
 	if cursor.yLoc ~= 140 then -- keeps cursor in the game field
 		cursor.yLoc = cursor.yLoc + 70
 	end
-
 end
 
 return board -- to fake make classes in lua

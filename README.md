@@ -13,13 +13,13 @@ A Basic Clone of [Pixel Kingdom](https://www.kickstarter.com/projects/seanyoung/
 
 ## Credits
 
-- Thanks Sean Young for creating such a fun game and inspiring me write a clone of it
+- Thanks Sean Young for creating such a fun game and inspiring me to write a clone of it
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2015 John Riselvato
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
